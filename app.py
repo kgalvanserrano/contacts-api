@@ -29,9 +29,22 @@ app = Flask(__name__)
 def index():
     return "index"
 
-@app.route('/contacts', methods=['GET', 'POST'])
+@app.route('/contacts', methods=['GET'])
 def contacts():
-    pass
+    if request.method == 'GET':
+        return jsonify(contacts)
+    
+@app.route('/create-contact', methods=['POST'])
+def create_contact():
+    data = request.get_json()
+    return jsonify(data), 201
+
+@app.route('/update-contact/<int:id>', methods=['PUT'])
+def update_contact(id):
+    data = request.get_json()
+    if not data or not data.get('name'):
+        abort(400, description="Name is required")
+    return jsonify(data)
 
 if __name__ == '__main__':
-    pass
+    app.run(debug=True)
