@@ -1,0 +1,3 @@
+# lists the Python packages your project depends on. Later, someone could pip install -r requirements.txt to set up the project environment.
+
+Flask
